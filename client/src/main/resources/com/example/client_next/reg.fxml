@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.PasswordField?>
+
+<?import javafx.scene.control.TextArea?>
+<VBox alignment="CENTER" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.client_next.RegController" stylesheets ="/style.css">
+
+
+        <TextField fx:id="loginField" promptText="login" />
+        <PasswordField fx:id="passwordField" promptText="password" />
+        <TextField fx:id="nicknameField" promptText="nickname" onAction="#tryToReg" />
+
+        <TextArea fx:id="textArea" VBox.vgrow="ALWAYS" editable="false"/>
+
+        <Button text="reg"  minWidth="100" onAction="#tryToReg"/>
+
+
+
+
+</VBox>

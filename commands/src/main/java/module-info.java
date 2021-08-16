@@ -1,0 +1,3 @@
+module commands {
+    exports commands;
+}
