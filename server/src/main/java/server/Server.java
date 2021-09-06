@@ -1,6 +1,8 @@
 package server;
 
 import commands.Command;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -9,6 +11,9 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Server {
+
+   private static final Logger log = LoggerFactory.getLogger(ClientHandler.class);
+
    private ServerSocket server;
    private Socket socket;
    private final int PORT = 8190;
@@ -24,13 +29,15 @@ public class Server {
 
         try {
             server = new ServerSocket(PORT);
-            System.out.println("server started");
+//            System.out.println("server started");
+            log.info("server started");
 
 
 
             while (true){
                 socket = server.accept();
-                System.out.println("client connected" + socket.getRemoteSocketAddress());
+//                System.out.println("client connected" + socket.getRemoteSocketAddress());
+                log.info("client connected" + socket.getRemoteSocketAddress());
                new ClientHandler(this, socket);
             }
 
