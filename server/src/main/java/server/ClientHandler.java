@@ -1,6 +1,8 @@
 package server;
 
 import commands.Command;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -11,6 +13,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class ClientHandler {
+
+    private static final Logger log = LoggerFactory.getLogger(ClientHandler.class);
+
     private Server server;
     private Socket socket;
 
@@ -44,9 +49,12 @@ public class ClientHandler {
                                     String str = in.readUTF();
                                     if (str.startsWith("/")) {
                                         if (str.equals(Command.END)) {
-                                            System.out.println("client want to disconnected");
+                                            log.info("client want to disconnected");
+//                                            System.out.println("client want to disconnected");
                                             out.writeUTF(Command.END);
-                                            throw new RuntimeException("client want to disconnected");
+//                                            throw new RuntimeException("client want to disconnected");
+                                            log.error("client want to disconnected");
+
                                         }
                                         if (str.startsWith(Command.AUTH)) {
                                             String[] token = str.split("\\s");
@@ -113,7 +121,8 @@ public class ClientHandler {
                         } catch (IOException e) {
                             e.printStackTrace();
                         } finally {
-                            System.out.println("client disconnected");
+//                            System.out.println("client disconnected");
+                            log.info("client disconnected");
                             server.unsubscribe(this);
                             try {
                                 socket.close();

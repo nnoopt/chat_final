@@ -62,6 +62,8 @@ public class HelloController implements Initializable {
     private Stage regStage;
     private RegController regController;
 
+    ChatHistory chatHistory;
+
     public void setAuthenticated(boolean authenticated) {
         this.authenticated = authenticated;
         messagePanel.setVisible(authenticated);
@@ -124,6 +126,10 @@ public class HelloController implements Initializable {
                                 nickname = str.split("\\s")[1];
                                 setAuthenticated(true);
                                 break;
+                            }
+
+                            if (chatHistory == null){
+                                createChatHistory();
                             }
 
                             if (str.equals(Command.REG_OK)){
@@ -277,4 +283,13 @@ public class HelloController implements Initializable {
             e.printStackTrace();
         }
     }
+
+    public void createChatHistory (){
+        this.chatHistory = new ChatHistory(this.nickname);
+        chatHistory.init();
+
+    }
+
+
+
 }
